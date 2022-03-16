@@ -2,10 +2,11 @@
 import "./App.css";
 
 function App() {
+  const title = "welcome to new blog  ";
   return (
     <div className="App">
       <div className="content">
-        <h1>App component</h1>
+        <h1>{title}</h1>
       </div>
     </div>
   );
