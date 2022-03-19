@@ -1,4 +1,5 @@
 const BlogList = (props) => {
+// or using distructure const BlogList = ({blogs , title}) => {
   const blogs = props.blogs;
   console.log(props, blogs);
 
