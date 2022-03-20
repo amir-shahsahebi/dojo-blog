@@ -28,9 +28,12 @@ const Home = () => {
       setBlogs(newBlogs)
   }
   //use effect run when every render done 
+  //use effect dependencies [] run just in first load and other like below
   useEffect(()=>{
     console.log("use effect ran");
-  })
+    // console.log(blogs);
+    console.log(name);
+  },[name])
   return (
     <div className="home">
       <BlogList blogs={blogs} title= "All blogs" handleDelete={handleDelete} />
