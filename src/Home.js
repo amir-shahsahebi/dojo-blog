@@ -23,9 +23,13 @@ const Home = () => {
   //   const handleClickAgain = (name, e) => {
   //     console.log("Hello " + name, e.target);
   //   };
+  const handleDelete = (id) => {
+      const newBlogs= blogs.filter(blog=> blog.id !== id)
+      setBlogs(newBlogs)
+  }
   return (
     <div className="home">
-      <BlogList blogs={blogs} title= "All blogs" />
+      <BlogList blogs={blogs} title= "All blogs" handleDelete={handleDelete} />
       <BlogList blogs={blogs.filter(blog=>blog.author==="mario")} title= "mario's blogs" />
       <h2>Homepage</h2>
       <p>
