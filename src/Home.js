@@ -4,7 +4,7 @@ import BlogList from "./BlogList";
 const Home = () => {
   const [blogs, setBlogs] = useState(null);
   const [isPending, setIsPending] = useState(true)
-
+  const [error, setError] = useState(null)
 
   const [name, setName] = useState("mario");
   const [age, setAge] = useState("25");
@@ -41,13 +41,17 @@ const Home = () => {
             .then((data) => {
               setBlogs(data);
               setIsPending(false);
+              setError(null)
             })
-            .catch(err=>console.log(err)) //this type of catch runs when it cant fetch the date, like stopping json server
+            .catch(err=>{
+              setIsPending(false)
+              setError(err.message)}) //this type of catch runs when it cant fetch the date, like stopping json server
     }, 1000);
   },[]);
 
   return (
     <div className="home">
+      {{error} && <div>{error}</div>}
       {isPending && <div>Loading ...</div>}
       {blogs && (<BlogList blogs={blogs} title="All blogs" />)}
       {/* {blogs && (<BlogList
