@@ -1,17 +1,10 @@
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
-
+// resources for json server: http://localhost:8000/blogs
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
-    { title: "Welcome party!", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    {
-      title: "Web dev top tips",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 3,
-    },
-  ]);
+  const [blogs, setBlogs] = useState(null);
+  const [isPending, setIsPending] = useState(true)
+
 
   const [name, setName] = useState("mario");
   const [age, setAge] = useState("25");
@@ -23,21 +16,40 @@ const Home = () => {
   //   const handleClickAgain = (name, e) => {
   //     console.log("Hello " + name, e.target);
   //   };
-  const handleDelete = (id) => {
-      const newBlogs= blogs.filter(blog=> blog.id !== id)
-      setBlogs(newBlogs)
-  }
-  //use effect run when every render done 
+
+  // const handleDelete = (id) => {
+  //   const newBlogs = blogs.filter((blog) => blog.id !== id);
+  //   setBlogs(newBlogs);
+  // };
+  
+  //use effect run when every render done
   //use effect dependencies [] run just in first load and other like below
-  useEffect(()=>{
-    console.log("use effect ran");
-    // console.log(blogs);
-    console.log(name);
-  },[name])
+  // useEffect(()=>{
+  //   console.log("use effect ran");
+  //   // console.log(blogs);
+  //   console.log(name);
+  // },[name])
+
+  useEffect(() => {
+    setTimeout(() => {
+          fetch("http://localhost:8000/blogs")
+            .then((res) => res.json())
+            .then((data) => {
+              setBlogs(data);
+              setIsPending(false);
+            });
+    }, 1000);
+  },[]);
+
   return (
     <div className="home">
-      <BlogList blogs={blogs} title= "All blogs" handleDelete={handleDelete} />
-      <BlogList blogs={blogs.filter(blog=>blog.author==="mario")} title= "mario's blogs" />
+      {isPending && <div>Loading ...</div>}
+      {blogs && (<BlogList blogs={blogs} title="All blogs" />)}
+      {/* {blogs && (<BlogList
+          blogs={blogs.filter((blog) => blog.author === "mario")}
+          title="mario's blogs"
+        />
+      )} */}
       <h2>Homepage</h2>
       <p>
         {name} is {age} years old{" "}
