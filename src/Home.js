@@ -33,11 +33,16 @@ const Home = () => {
   useEffect(() => {
     setTimeout(() => {
           fetch("http://localhost:8000/blogs")
-            .then((res) => res.json())
+            .then((res) => {
+              if (!res.ok) { // you can watch res.ok in console if you log it
+                throw Error("couldn't fetch data from resource") // this type of error runs when url address in wrong
+              }
+             return res.json()})
             .then((data) => {
               setBlogs(data);
               setIsPending(false);
-            });
+            })
+            .catch(err=>console.log(err)) //this type of catch runs when it cant fetch the date, like stopping json server
     }, 1000);
   },[]);
 
