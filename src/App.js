@@ -3,6 +3,7 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import Create from "./Create";
 
 function App() {
   const title = "welcome to new blog";
@@ -17,9 +18,12 @@ function App() {
       <div className="content">
         {/* all of Routs go inside Switch component */}
         <Switch>
-          {/* the path is any thing that come after home page url address */}
-          <Route path="/">
+          {/* the path is any thing that come after home page url address and we use exact because we want to just open path named*/}
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/create">
+            <Create />
           </Route>
         </Switch>
         <p>liked {like} times</p>
