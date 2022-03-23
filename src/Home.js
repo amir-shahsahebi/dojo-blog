@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 // resources for json server: http://localhost:8000/blogs
 const Home = () => {
   const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs"); //when we use a hook, it automatically import that
 
-  const [name, setName] = useState("mario");
-  const [age, setAge] = useState("25");
-  const handleClick = () => {
-    // console.log("hi, you click me", e);
-    setName("Amir");
-    setAge(28);
-  };
+  // const [name, setName] = useState("mario");
+  // const [age, setAge] = useState("25");
+  // const handleClick = () => {
+  //   // console.log("hi, you click me", e);
+  //   setName("Amir");
+  //   setAge(28);
+  // };
   //   const handleClickAgain = (name, e) => {
   //     console.log("Hello " + name, e.target);
   //   };
@@ -41,7 +41,7 @@ const Home = () => {
           title="mario's blogs"
         />
       )} */}
-      <h2>Homepage</h2>
+      {/* <h2>Homepage</h2>
       <p>
         {name} is {age} years old{" "}
       </p>
@@ -50,7 +50,7 @@ const Home = () => {
       //    onClick={(e) => handleClickAgain("Mario", e)}
       >
         Click me again
-      </button>
+      </button> */}
     </div>
   );
 };
